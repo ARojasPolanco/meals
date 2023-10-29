@@ -1,18 +1,19 @@
+import Meal from "../Meals/meals.model.js"
 import Order from "./orders.model.js"
 
 export class OrderServices {
-    async findAllOrders() {
-        return await Order.findAll()
-    }
 
     async findOneOrder(id) {
-        return await Order.findOne(id)
+        return await Order.findOne({
+            where: {
+                id: id
+            }
+        })
     }
 
     async updateOrder(order, data) {
         return await order.update(data)
     }
-
 
     async createOrder(data) {
         return await Order.create(data)
@@ -25,7 +26,6 @@ export class OrderServices {
     }
 
     async findAllUserOrders() {
-
     }
 
 }

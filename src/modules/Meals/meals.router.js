@@ -1,23 +1,23 @@
 import express from 'express';
 
-export const router = express.Router();
-
-router.route('/').get(findAllMeals);
-
 import {
   findAllMeals,
   findOneMeals,
   updateMeals,
   deleteMeals,
   createMeals,
-  } from "./meals.controller.js"
-  
-router
-  .route('/:id')
+} from "./meals.controller.js"
 
+import { validExistRestaurant } from '../Restaurants/restaurant.middleware.js'
+
+export const router = express.Router();
+
+router.route('/:id').post(validExistRestaurant, createMeals)
+
+router.route('/').get(findAllMeals)
+
+router.route('/:id')
   .get(findOneMeals)
   .patch(updateMeals)
   .delete(deleteMeals)
 
-  .post(createMeals);
-  

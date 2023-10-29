@@ -1,6 +1,7 @@
 import Restaurant from './restaurant.model.js';
 
 export class RestaurantService {
+
   async findAllRestaurants() {
     return await Restaurant.findAll({
       where: {
