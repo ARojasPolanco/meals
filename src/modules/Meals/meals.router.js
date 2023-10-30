@@ -15,14 +15,13 @@ export const router = express.Router();
 
 router.route('/').get(findAllMeals)
 
-router.route("/:id")
-.get(findOneMeals)
+router.route("/:id").get(findOneMeals)
 
 router.use(protect)
 
-router.route('/:id').post(validExistRestaurant,restrictTo("admin"), createMeals)
+router.route('/:id').post(validExistRestaurant, restrictTo("admin"), createMeals)
 
 router.route('/:id')
-  .patch(restrictTo("admin"),updateMeals)
-  .delete(restrictTo("admin"),deleteMeals)
+  .patch(restrictTo("admin"), updateMeals)
+  .delete(restrictTo("admin"), deleteMeals)
 

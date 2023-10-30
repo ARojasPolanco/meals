@@ -20,7 +20,7 @@ const Meal = sequelize.define('meals', {
     restaurantId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        field: 'restaurante_id'
+        field: 'restaurant_id'
     },
     status: {
         type: DataTypes.BOOLEAN,

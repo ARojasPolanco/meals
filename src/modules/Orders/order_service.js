@@ -39,8 +39,8 @@ export class OrderServices {
         })
     }
 
-    async updateOrder(order, data) {
-        return await order.update(data)
+    async updateOrder(order) {
+        return await order.update({ status: "completed" })
     }
 
     async deleteOrder(order) {

@@ -2,6 +2,7 @@ import User from '../Users/user.model.js';
 import Review from './review.model.js';
 
 export class ReviewService {
+
   async findOneReview(id) {
     return Review.findOne({
       where: {

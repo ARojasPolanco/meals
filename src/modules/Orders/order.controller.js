@@ -32,10 +32,34 @@ export const createOrder = catchAsync(async (req, res, next) => {
 })
 
 export const updateOrder = catchAsync(async (req, res, next) => {
-})
+    const { id } = req.params
+
+    const order = await orderService.findOneOrder(id)
+
+    if (!order) {
+        return next(new AppError(`Order whit id ${id} not found`, 404))
+    }
+
+    await orderService.updateOrder(order)
+
+    return res.status(200).json({
+        message: 'The order has completed'
+    })
+});
 
 export const deleteOrder = catchAsync(async (req, res, next) => {
-})
+    const { id } = req.params;
+
+    const order = await orderService.findOneOrder(id);
+
+    if (!order) {
+        return next(new AppError(`Order whit id ${id} not found`, 404));
+    }
+
+    await orderService.deleteOrder(order);
+
+    return res.status(204).json(null);
+});
 
 export const findAllUserOrders = catchAsync(async (req, res, next) => {
 

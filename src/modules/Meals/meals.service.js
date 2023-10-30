@@ -28,7 +28,13 @@ export class MealServices {
     return await Meal.findOne({
       where: {
         id: id
-      }
+      },
+      include: [
+        {
+          model: Restaurant,
+          attributes: ['name', 'address', 'rating', 'status']
+        }
+      ]
     })
   }
 

@@ -1,11 +1,19 @@
 import Restaurant from './restaurant.model.js';
+import Review from '../Reviews/review.model.js'
 
 export class RestaurantService {
+
   async findAllRestaurants() {
     return await Restaurant.findAll({
       where: {
         status: true,
       },
+      include: [
+        {
+          model: Review,
+          attributes: ['comment', 'rating']
+        }
+      ]
     });
   }
 
@@ -19,6 +27,12 @@ export class RestaurantService {
         status: true,
         id: restaurantId || id
       },
+      include: [
+        {
+          model: Review,
+          attributes: ['comment', 'rating']
+        }
+      ]
     });
   }
 

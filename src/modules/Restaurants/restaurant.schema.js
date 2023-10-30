@@ -28,6 +28,7 @@ export const validateRestaurant = (data) => {
     restaurantData,
   };
 };
+
 export const validateReview = (data) => {
   const result = reviewSchema.safeParse(data);
 
