@@ -8,7 +8,6 @@ import { protect } from '../modules/Users/users.middleware.js';
 export const router = express.Router()
 
 router.use("/users", userRouter)
-router.use(protect)
 router.use("/restaurants", restaurantRouter)
 router.use("/orders", orderRouter)
 router.use("/meals", mealsRouter)

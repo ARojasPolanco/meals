@@ -1,13 +1,23 @@
+import Restaurant from "../Restaurants/restaurant.model.js"
 import Meal from "./meals.model.js"
+import { Op } from "sequelize";
 
 export class MealServices {
 
   async findAllMeals() {
     return await Meal.findAll({
       where: {
-        status: true
-      }
-    })
+        status: {
+          [Op.notIn]: [false],
+        },
+      },
+      include: [
+        {
+          model: Restaurant,
+          attributes: ["name", "address", "rating", "status"],
+        },
+      ],
+    });
   }
 
   async createMeal(data) {

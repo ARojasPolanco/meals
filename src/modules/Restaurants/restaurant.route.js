@@ -14,16 +14,21 @@ import {
 } from "./restaurants.controller.js"
 import { validExistRestaurant } from "./restaurant.middleware.js"
 import { validExistReview } from "../Reviews/review.middleware.js"
-import { protect, protectAccountOwner } from "../Users/users.middleware.js"
+import { protect, protectAccountOwner, restrictTo } from "../Users/users.middleware.js"
 
 router.route('/')
       .get(findAllRestaurants)
-      .post(CreateRestaurant)
+      router.route("/:id")
+      .get(findOneRestaurant)
+
+      router.use(protect)
+
+      router.route("/")
+      .post(CreateRestaurant,restrictTo("admin"))
 
 router.route('/:id')
-      .get(findOneRestaurant)
-      .patch(updateRestaurant)
-      .delete(deleteRestaurant)
+      .patch(restrictTo("admin"),updateRestaurant)
+      .delete(restrictTo("admin"),deleteRestaurant)
 
 router.post("/reviews/:id", validExistRestaurant, createReviewToRestaurant)
 

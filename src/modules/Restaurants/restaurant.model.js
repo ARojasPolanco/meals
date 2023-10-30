@@ -1,12 +1,13 @@
 import { DataTypes } from "sequelize";
-import {sequelize} from "../../config/database/database.js"
+import { sequelize } from "../../config/database/database.js"
 
 const Restaurant = sequelize.define('restaurants', {
     id: {
-      primaryKey: true,
-      allowNull: false,
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
+        primaryKey: true,
+        allowNull: false,
+        autoIncrement: true,
+        type: DataTypes.INTEGER,
+        field: 'restaurant_id'
     },
     name: {
         type: DataTypes.STRING,

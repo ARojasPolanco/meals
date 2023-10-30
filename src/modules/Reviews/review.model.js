@@ -10,7 +10,8 @@ const Review = sequelize.define('reviews', {
   },
   userId: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
+    field: 'user_id'
   },
   comment: {
     type: DataTypes.STRING,
@@ -18,7 +19,8 @@ const Review = sequelize.define('reviews', {
   },
   restaurantId: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
+    field: 'restaurant_id'
   },
   rating: {
     type: DataTypes.INTEGER,

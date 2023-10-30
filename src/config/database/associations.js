@@ -4,17 +4,19 @@ import User from "../../modules/Users/user.model.js"
 import Meal from "../../modules/Meals/meals.model.js"
 import Order from "../../modules/Orders/orders.model.js"
 
-
 export const initModel = () => {
-    User.hasMany(Review)
-    Review.belongsTo(User)
+    User.hasMany(Order, { foreignKey: "user_id", })
+    Order.belongsTo(User, { foreignKey: "user_id", })
 
-    Restaurant.hasMany(Review)
-    Review.belongsTo(Restaurant)
+    User.hasMany(Review, { foreignKey: "user_id", })
+    Review.belongsTo(User, { foreignKey: "user_id" })
 
-    Order.hasOne(Meal)
-    Meal.belongsTo(Order)
+    Restaurant.hasMany(Meal, { foreignKey: "restaurant_id", })
+    Meal.belongsTo(Restaurant, { foreignKey: "restaurant_id", })
 
-    User.hasMany(Order)
-    Order.belongsTo(User)
+    Restaurant.hasMany(Review, { foreignKey: "restaurant_id", })
+    Review.belongsTo(Restaurant, { foreignKey: "restaurant_id", })
+
+    Meal.hasOne(Order, { foreignKey: "meal_id", })
+    Order.belongsTo(Meal, { foreignKey: "meal_id", })
 }

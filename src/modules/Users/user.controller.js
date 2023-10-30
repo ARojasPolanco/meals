@@ -7,6 +7,7 @@ import {
 import { UserServices } from './users_service.js';
 import generateJWT from '../../config/plugins/generate-JWT.js';
 import { verifyPassword } from '../../config/plugins/encrypted-password.js';
+import { orderService } from '../Orders/order.controller.js'
 
 const userService = new UserServices();
 
@@ -77,15 +78,9 @@ export const updateUser = catchAsync(async (req, res, next) => {
     });
   }
 
-  const { id } = req.params
+  const { user } = req;
 
-  const user = await userService.findOneById(id)
-
-  if (!user) {
-    return next(new AppError('This user does not exist', 404));
-  }
-
-  const updatedUser = await userService.updateUser(user, userData);
+  const updatedUser = await userService.updateUser(user, req.body);
 
   return res.status(200).json(updatedUser);
 });
@@ -103,3 +98,26 @@ export const deleteUser = catchAsync(async (req, res, next) => {
 
   return res.status(200).json();
 });
+
+export const findAllOrders = catchAsync(async (req, res, next) => {
+
+  const { sessionUser: user } = req
+
+  const orders = await orderService.findAllOrders(user?.id);
+
+  return res.status(200).json(orders);
+})
+
+export const findOneOrder = catchAsync(async (req, res, next) => {
+  const { id } = req.params
+
+  const order = await orderService.findOneOrder(id)
+
+  if (!order) {
+    return next(new AppError(`Order whit id ${id} not found`, 404))
+  }
+
+  return res.status(200).json(order)
+})
+
+

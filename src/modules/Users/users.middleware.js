@@ -1,5 +1,5 @@
 import { promisify } from 'util';
-import jwt from 'jsonwebtoken'; 
+import jwt from 'jsonwebtoken';
 import { envs } from '../../config/enviroments/enviroments.js';
 import { UserServices } from './users_service.js';
 import { catchAsync } from '../../errors/index.js';
@@ -28,7 +28,7 @@ export const protect = catchAsync(async (req, res, next) => {
     envs.SECRET_JWD_SEED
   );
 
-const user = await userService.findOneById(decoded.id)
+  const user = await userService.findOneById(decoded.id)
 
   if (!user) {
     return next(
@@ -55,9 +55,22 @@ export const restrictTo = (...roles) => {
 export const protectAccountOwner = catchAsync(async (req, res, next) => {
   const { user, sessionUser } = req;
 
-  if (user.id !== sessionUser.id) {
+  if (user?.id !== sessionUser?.id) {
     return next(new AppError('You do not own this account.', 401));
   }
 
- next();
+  next();
 });
+
+export const validExistUser = catchAsync(async (req, res, next) => {
+  const { id } = req.params
+
+  const user = await userService.findOneById(id)
+
+  if (!user) {
+    return next(new AppError('This user does not exist', 404));
+  }
+
+  req.user = user;
+  next()
+})

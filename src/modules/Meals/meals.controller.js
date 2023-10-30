@@ -2,7 +2,7 @@ import { AppError, catchAsync } from "../../errors/index.js"
 import { validateMeal } from "./meals.schema.js"
 import { MealServices } from "./meals.service.js"
 
-const mealService = new MealServices()
+export const mealService = new MealServices()
 
 export const findAllMeals = catchAsync(async (req, res, next) => {
     const meals = await mealService.findAllMeals()

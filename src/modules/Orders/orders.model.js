@@ -10,15 +10,18 @@ const Order = sequelize.define('orders', {
   },
   mealId: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
+    field: 'meal_id'
   },
   UserId: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
+    field: 'user_id'
   },
   totalPrice: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
+    field: 'total_price'
   },
   quantity: {
     type: DataTypes.INTEGER,

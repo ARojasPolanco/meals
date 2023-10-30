@@ -6,7 +6,8 @@ const Meal = sequelize.define('meals', {
         primaryKey: true,
         allowNull: false,
         type: DataTypes.INTEGER,
-        autoIncrement: true
+        autoIncrement: true,
+        field: 'meal_id'
     },
     name: {
         type: DataTypes.STRING,

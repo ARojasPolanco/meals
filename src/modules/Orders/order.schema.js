@@ -3,7 +3,7 @@ import { extractValidationData } from '../../common/utils/extractErrorData.js';
 
 const orderSchema = z.object({
     quantity: z.number().positive(),
-    mealId: z.number()
+    mealId: z.number().positive()
 })
 
 export const validateOrder = (data) => {
